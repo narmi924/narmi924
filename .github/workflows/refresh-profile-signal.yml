@@ -1,0 +1,42 @@
+name: Refresh contribution record
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Regenerate contribution record
+        env:
+          PROFILE_GITHUB_TOKEN: ${{ secrets.PROFILE_READ_TOKEN }}
+        run: |
+          if [ -z "$PROFILE_GITHUB_TOKEN" ]; then
+            echo "PROFILE_READ_TOKEN is not configured; leaving the existing contribution record unchanged."
+            exit 0
+          fi
+          node scripts/generate-profile-signal.mjs
+
+      - name: Commit generated signal when it changed
+        run: |
+          if git diff --quiet -- assets/contribution-signal.svg; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/contribution-signal.svg
+          git commit -m "chore: refresh profile signal"
+          git push

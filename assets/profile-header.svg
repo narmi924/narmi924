@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 270" role="img" aria-labelledby="title description">
+  <title id="title">Imranjan — a personal work index</title>
+  <desc id="description">An animated warm editorial profile card for Imranjan, with a kinetic letterpress title and a live folio composition.</desc>
+  <defs>
+    <pattern id="paper-grain" width="17" height="17" patternUnits="userSpaceOnUse">
+      <path d="M2 3h1M11 7h1M6 13h1M15 15h1" stroke="#171511" stroke-linecap="square" stroke-opacity=".052"/>
+    </pattern>
+    <filter id="paper-shadow" x="-24%" y="-28%" width="148%" height="156%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#3A271B" flood-opacity=".16"/>
+    </filter>
+    <style>
+      .folio { animation: folio 6.6s cubic-bezier(.37, 0, .18, 1) infinite; transform-origin: 869px 135px; }
+      .folio-back { animation: folio-back 6.6s cubic-bezier(.37, 0, .18, 1) infinite; transform-origin: 869px 135px; }
+      .ink-registration { animation: ink-register 9.6s cubic-bezier(.16, 1, .3, 1) infinite both; transform-origin: 64px 142px; }
+      .underline { animation: underline 8.6s cubic-bezier(.16, 1, .3, 1) infinite both; transform-origin: left center; }
+      .print-column { transform-box: fill-box; transform-origin: center bottom; animation: typeset 7.8s cubic-bezier(.16, 1, .3, 1) infinite both; }
+      @keyframes folio {
+        0%, 18%, 100% { transform: translateY(0) rotate(0); }
+        42% { transform: translateY(-9px) rotate(-.7deg); }
+        66% { transform: translateY(2px) rotate(.25deg); }
+      }
+      @keyframes folio-back {
+        0%, 18%, 100% { opacity: .6; transform: translate(0, 0) rotate(0); }
+        42% { opacity: .9; transform: translate(-10px, 8px) rotate(.9deg); }
+        66% { opacity: .42; transform: translate(4px, -2px) rotate(-.25deg); }
+      }
+      @keyframes ink-register {
+        0%, 7%, 100% { opacity: 0; transform: translate(-14px, 5px); }
+        18%, 72% { opacity: .34; transform: translate(1px, -1px); }
+        84% { opacity: 0; transform: translate(10px, -3px); }
+      }
+      @keyframes underline {
+        0%, 5%, 100% { opacity: 0; transform: scaleX(0); }
+        17%, 80% { opacity: 1; transform: scaleX(1); }
+        93% { opacity: .18; transform: scaleX(.68); }
+      }
+      @keyframes typeset {
+        0%, 7% { opacity: .12; transform: translateY(28px) scaleY(.25); }
+        24%, 76% { opacity: 1; transform: translateY(0) scaleY(1); }
+        91%, 100% { opacity: .18; transform: translateY(-9px) scaleY(.65); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .folio, .folio-back, .ink-registration, .underline, .print-column { animation: none; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1080" height="270" rx="34" fill="#F3F0E8"/>
+  <rect x="16" y="16" width="1048" height="238" rx="26" fill="#FCFBFA" stroke="#171511" stroke-opacity=".15"/>
+  <rect x="17" y="17" width="1046" height="236" rx="25" fill="url(#paper-grain)"/>
+
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="64" y="53" width="20" height="2" fill="#8B4513"/>
+    <text x="96" y="58" fill="#8B4513" font-size="12.5" font-weight="750" letter-spacing="2.15">PERSONAL WORK INDEX</text>
+    <text class="ink-registration" x="64" y="151" fill="#8B4513" font-size="84" font-weight="800" letter-spacing="-3.4">Imranjan</text>
+    <text x="64" y="151" fill="#171511" font-size="84" font-weight="800" letter-spacing="-3.4">Imranjan</text>
+    <rect class="underline" x="64" y="174" width="394" height="2" fill="#8B4513"/>
+    <text x="64" y="214" fill="#5F5549" font-size="17" font-weight="500" letter-spacing="-.22">A personal index of systems, interfaces, and experiments.</text>
+  </g>
+
+  <g class="folio-back" opacity=".6">
+    <rect x="710" y="46" width="286" height="180" rx="29" fill="#8B4513" fill-opacity=".09"/>
+    <rect x="724" y="34" width="272" height="190" rx="28" fill="#8B4513" fill-opacity=".045"/>
+  </g>
+
+  <g class="folio" filter="url(#paper-shadow)" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="742" y="41" width="250" height="188" rx="27" fill="#171511"/>
+    <rect x="760" y="60" width="42" height="2" fill="#D7BDA1"/>
+    <text x="760" y="84" fill="#F3F0E8" font-size="10.5" font-weight="750" letter-spacing="1.8">LIVE FOLIO</text>
+    <text x="754" y="194" fill="#F3F0E8" fill-opacity=".115" font-size="112" font-weight="800" letter-spacing="-11">IM</text>
+    <g aria-label="Animated typesetting composition">
+      <rect class="print-column" x="764" y="124" width="14" height="56" rx="2" fill="#D7BDA1" style="animation-delay:0s"/>
+      <rect class="print-column" x="784" y="110" width="16" height="70" rx="2" fill="#8B4513" style="animation-delay:.12s"/>
+      <rect class="print-column" x="806" y="136" width="12" height="44" rx="2" fill="#F3F0E8" fill-opacity=".86" style="animation-delay:.24s"/>
+      <rect class="print-column" x="824" y="97" width="17" height="83" rx="2" fill="#D7BDA1" style="animation-delay:.36s"/>
+      <rect class="print-column" x="847" y="119" width="13" height="61" rx="2" fill="#8B4513" style="animation-delay:.48s"/>
+      <rect class="print-column" x="866" y="105" width="16" height="75" rx="2" fill="#F3F0E8" fill-opacity=".82" style="animation-delay:.60s"/>
+      <rect class="print-column" x="888" y="132" width="12" height="48" rx="2" fill="#D7BDA1" style="animation-delay:.72s"/>
+      <rect class="print-column" x="906" y="114" width="17" height="66" rx="2" fill="#8B4513" style="animation-delay:.84s"/>
+      <rect class="print-column" x="929" y="101" width="14" height="79" rx="2" fill="#F3F0E8" fill-opacity=".84" style="animation-delay:.96s"/>
+      <rect class="print-column" x="949" y="128" width="16" height="52" rx="2" fill="#D7BDA1" style="animation-delay:1.08s"/>
+    </g>
+    <rect x="760" y="199" width="204" height="1" fill="#F3F0E8" fill-opacity=".26"/>
+    <text x="760" y="217" fill="#D7BDA1" font-size="10.5" font-weight="650" letter-spacing="1.1">A WORK IN PROGRESS</text>
+  </g>
+</svg>
