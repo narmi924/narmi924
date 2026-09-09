@@ -30,6 +30,7 @@ My current direction is simple: make sophisticated systems feel dependable to th
 | System | What it demonstrates | Engineering surface |
 | --- | --- | --- |
 | [LCIMS Cloud](https://lcims.imranjan.me/login) | A multi-tenant evolution of a real-estate operating system | Module entitlements, RBAC, approvals, documents, deployment scripts, regression-focused delivery |
+| [Look2Act](https://drive.google.com/file/d/12MltCXOCFPti7GvGVxwfDP8TuD26sUZG/view?usp=sharing) + [gaze dataset collector](https://github.com/narmi924/gaze_dataset_collector) + [demo](https://drive.google.com/file/d/1DjjuPsoB7M3zJUS3Ohix-e2r6DbhTU0c/view?usp=sharing) | End-to-end webcam gaze tracking and dwell interaction, from privacy-aware data collection to calibrated desktop interaction | Python, PyTorch / ONNX Runtime, OpenCV, MediaPipe, PyQt6, 25-point calibration, Windows deployment |
 | [YaQut OA](https://yaqut.imranjan.me/) | A workflow-first office-automation platform | Next.js, NestJS, Prisma, PostgreSQL, auditability, notifications, attachments |
 | [Yigui](https://github.com/narmi924/YiguiApp) + [server](https://github.com/narmi924/yigui-server) | Virtual try-on and interaction experiments that cross mobile, CV, and backend systems | Swift, FastAPI, workers, 3D model processing, Nginx deployment |
 | [mengsheng-cup-2024](https://github.com/narmi924/mengsheng-cup-2024) | A public embedded sound-source localisation project | STM32H7, embedded C, Python analysis, MATLAB TDOA simulation, multi-microphone signal processing |
