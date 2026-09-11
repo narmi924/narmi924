@@ -25,6 +25,13 @@ I am Imran, a systems-minded full-stack builder working at the intersection of A
 
 My current direction is simple: make sophisticated systems feel dependable to the people using them.
 
+## ➹ Hackathons
+
+| Project | What it demonstrates | Result |
+| --- | --- | --- |
+| [TikTok TechJam 2026 Track 4](https://github.com/narmi924/shopping-copilot) | An offline-first, state-aware conversational search and recommendation agent: Shopping CopilotA multi-tenant evolution of a real-estate operating system | Not Qual for Finals |
+| NUS-ISS/AWS Show Me Your Agents Hackathon | Real Production Planning Agent | Attending |
+
 ## ▣ Selected work
 
 | System | What it demonstrates | Engineering surface |
@@ -36,7 +43,7 @@ My current direction is simple: make sophisticated systems feel dependable to th
 | [mengsheng-cup-2024](https://github.com/narmi924/mengsheng-cup-2024) | A public embedded sound-source localisation project | STM32H7, embedded C, Python analysis, MATLAB TDOA simulation, multi-microphone signal processing |
 | [AccessAudit](https://github.com/narmi924/AccessAudit) | A deliberately small experiment in verifiable approvals | Solidity, Foundry, role-based events, hashed audit payloads |
 
-## ↗ Open source
+## ➯ Open source
 
 I also work upstream, where reliability usually becomes visible only after things fail. The contribution signal below live-counts public activity and open upstream PRs; these are the projects currently in focus:
 
