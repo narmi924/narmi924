@@ -27,10 +27,10 @@ My current direction is simple: make sophisticated systems feel dependable to th
 
 ## ➹ Hackathons
 
-| Project | What it demonstrates | Result |
+| Project | What it demonstrates | Status |
 | --- | --- | --- |
-| [TikTok TechJam 2026 Track 4](https://github.com/narmi924/shopping-copilot) | An offline-first, state-aware conversational search and recommendation agent: Shopping CopilotA multi-tenant evolution of a real-estate operating system | Not Qual for Finals |
-| NUS-ISS/AWS Show Me Your Agents Hackathon | Real Production Planning Agent | Attending |
+| [TikTok TechJam 2026 - Shopping Copilot](https://github.com/narmi924/shopping-copilot) | Offline, state-aware conversational shopping agent with retrieval, clarification, and constrained reranking | Public submission |
+| NUS-ISS / AWS Show Me Your Agents Hackathon | Production-planning agent with tool-driven workflows and human-in-the-loop review | In progress |
 
 ## ▣ Selected work
 
