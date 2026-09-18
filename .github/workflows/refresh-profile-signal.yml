@@ -1,0 +1,66 @@
+name: Refresh profile records
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-records
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check PR ledger generator
+        run: node --test scripts/update-upstream-prs.test.mjs
+
+      - name: Update upstream PR ledger
+        id: ledger
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/update-upstream-prs.mjs
+
+      - name: Regenerate contribution record
+        id: contributions
+        continue-on-error: true
+        env:
+          PROFILE_GITHUB_TOKEN: ${{ secrets.PROFILE_READ_TOKEN }}
+        run: |
+          if [ -z "$PROFILE_GITHUB_TOKEN" ]; then
+            echo "::error::Add the PROFILE_READ_TOKEN Actions secret to refresh private-inclusive contributions. The existing SVG is preserved."
+            exit 1
+          fi
+          node scripts/generate-profile-signal.mjs
+
+      - name: Commit updated records
+        if: ${{ !cancelled() && (steps.ledger.outcome == 'success' || steps.contributions.outcome == 'success') }}
+        run: |
+          if git diff --quiet -- README.md assets/contribution-signal.svg; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md assets/contribution-signal.svg
+          git commit -m "chore: refresh profile records"
+          git push
+
+      - name: Report incomplete refresh
+        if: ${{ !cancelled() && (steps.ledger.outcome == 'failure' || steps.contributions.outcome == 'failure') }}
+        run: |
+          echo "::error::One or more records could not refresh. Successful updates were committed; inspect the failed generation step."
+          exit 1

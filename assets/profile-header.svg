@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 320" role="img" aria-labelledby="title">
+  <title id="title">Imranjan</title>
+  <defs>
+    <text id="name" x="100" y="217" textLength="880" lengthAdjust="spacingAndGlyphs" font-family="Georgia, 'Times New Roman', serif" font-size="190" font-style="italic" letter-spacing="-8">Imranjan</text>
+    <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#FCFAF5"/><stop offset="1" stop-color="#F0E9DD"/></linearGradient>
+    <pattern id="grain" width="11" height="13" patternUnits="userSpaceOnUse"><path d="M2 3h.6M8 10h.6" stroke="#705035" stroke-opacity=".075"/></pattern>
+    <clipPath id="slice-0"><rect x="96" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-1"><rect x="133" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-2"><rect x="170" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-3"><rect x="207" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-4"><rect x="244" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-5"><rect x="281" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-6"><rect x="318" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-7"><rect x="355" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-8"><rect x="392" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-9"><rect x="429" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-10"><rect x="466" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-11"><rect x="503" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-12"><rect x="540" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-13"><rect x="577" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-14"><rect x="614" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-15"><rect x="651" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-16"><rect x="688" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-17"><rect x="725" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-18"><rect x="762" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-19"><rect x="799" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-20"><rect x="836" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-21"><rect x="873" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-22"><rect x="910" y="20" width="37.1" height="282"/></clipPath>
+    <clipPath id="slice-23"><rect x="947" y="20" width="37.1" height="282"/></clipPath>
+    <style>
+      .ribbon { animation:weave 12s cubic-bezier(.45,0,.2,1) infinite; animation-delay:calc(var(--delay) - 3.5s); }
+      .face { fill:#221E19; animation:turn 12s ease-in-out infinite; animation-delay:calc(var(--delay) - 3.5s); }
+      .edge { fill:#A66D47; opacity:.65; }
+      .impression { fill:none; stroke:#8B4513; stroke-width:.55; opacity:.12; }
+      @keyframes weave {
+        0%,12%,100% { transform:translateY(0) skewY(0); }
+        27% { transform:translateY(var(--lift)) skewY(var(--lean)) scaleX(.84); }
+        42%,62% { transform:translateY(0) skewY(0); }
+        77% { transform:translateY(calc(var(--lift) * -.8)) skewY(calc(var(--lean) * -1)) scaleX(.84); }
+        92% { transform:translateY(0) skewY(0); }
+      }
+      @keyframes turn {
+        0%,12%,42%,62%,92%,100% { fill:#221E19; }
+        27% { fill:#8B4513; }
+        77% { fill:#63422E; }
+      }
+      @media (prefers-reduced-motion:reduce) { .ribbon,.face { animation:none; } }
+    </style>
+  </defs>
+  <rect width="1080" height="320" rx="16" fill="url(#paper)"/>
+  <rect width="1080" height="320" rx="16" fill="url(#grain)"/>
+  <use href="#name" class="impression"/>
+  <g clip-path="url(#slice-0)"><g class="ribbon" style="--delay:0.000s;--lift:0.00px;--lean:9.80deg;transform-origin:114.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-1)"><g class="ribbon" style="--delay:0.075s;--lift:12.46px;--lean:9.44deg;transform-origin:151.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-2)"><g class="ribbon" style="--delay:0.150s;--lift:24.01px;--lean:8.37deg;transform-origin:188.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-3)"><g class="ribbon" style="--delay:0.225s;--lift:33.76px;--lean:6.69deg;transform-origin:225.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-4)"><g class="ribbon" style="--delay:0.300s;--lift:41.02px;--lean:4.51deg;transform-origin:262.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-5)"><g class="ribbon" style="--delay:0.375s;--lift:45.23px;--lean:1.99deg;transform-origin:299.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-6)"><g class="ribbon" style="--delay:0.450s;--lift:46.08px;--lean:-0.67deg;transform-origin:336.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-7)"><g class="ribbon" style="--delay:0.525s;--lift:43.53px;--lean:-3.28deg;transform-origin:373.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-8)"><g class="ribbon" style="--delay:0.600s;--lift:37.75px;--lean:-5.66deg;transform-origin:410.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-9)"><g class="ribbon" style="--delay:0.675s;--lift:29.16px;--lean:-7.60deg;transform-origin:447.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-10)"><g class="ribbon" style="--delay:0.750s;--lift:18.41px;--lean:-8.99deg;transform-origin:484.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-11)"><g class="ribbon" style="--delay:0.825s;--lift:6.29px;--lean:-9.70deg;transform-origin:521.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-12)"><g class="ribbon" style="--delay:0.900s;--lift:-6.29px;--lean:-9.70deg;transform-origin:558.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-13)"><g class="ribbon" style="--delay:0.975s;--lift:-18.41px;--lean:-8.99deg;transform-origin:595.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-14)"><g class="ribbon" style="--delay:1.050s;--lift:-29.16px;--lean:-7.60deg;transform-origin:632.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-15)"><g class="ribbon" style="--delay:1.125s;--lift:-37.75px;--lean:-5.66deg;transform-origin:669.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-16)"><g class="ribbon" style="--delay:1.200s;--lift:-43.53px;--lean:-3.28deg;transform-origin:706.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-17)"><g class="ribbon" style="--delay:1.275s;--lift:-46.08px;--lean:-0.67deg;transform-origin:743.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-18)"><g class="ribbon" style="--delay:1.350s;--lift:-45.23px;--lean:1.99deg;transform-origin:780.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-19)"><g class="ribbon" style="--delay:1.425s;--lift:-41.02px;--lean:4.51deg;transform-origin:817.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-20)"><g class="ribbon" style="--delay:1.500s;--lift:-33.76px;--lean:6.69deg;transform-origin:854.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-21)"><g class="ribbon" style="--delay:1.575s;--lift:-24.01px;--lean:8.37deg;transform-origin:891.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-22)"><g class="ribbon" style="--delay:1.650s;--lift:-12.46px;--lean:9.44deg;transform-origin:928.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+  <g clip-path="url(#slice-23)"><g class="ribbon" style="--delay:1.725s;--lift:0.00px;--lean:9.80deg;transform-origin:965.5px 160px"><use href="#name" class="edge" transform="translate(0 4)"/><use href="#name" class="face"/></g></g>
+</svg>
