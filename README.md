@@ -55,7 +55,7 @@ My contributions to agent-browser and native focus on browser reliability, Windo
 | [native](https://github.com/vercel-labs/native/pulls?q=is%3Apr+author%3Anarmi924) | 4 | 0 | 4 | Windows portability, image-cache test compilation, markup-server correctness, build validation |
 
 <details>
-<summary><strong>Recent upstream PR ledger — updated: 2026-09-23</strong></summary>
+<summary><strong>Recent upstream PR ledger — updated: 2026-09-24</strong></summary>
 
 Eight most recently updated PRs per project · UTC dates.
 
