@@ -1,7 +1,7 @@
 <p>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-header-dark.svg" />
-    <img src="./assets/profile-header.svg" width="100%" alt="Imranjan" />
+    <img align="middle" src="./assets/profile-header.svg" width="100%" alt="Imranjan" />
   </picture>
 </p>
 
@@ -13,8 +13,6 @@
 I'm Imran, a developer in Singapore, studying for the [Graduate Diploma in Systems Analysis at NUS-ISS](https://www.iss.nus.edu.sg/graduate-programmes/programme/detail/graduate-diploma-in-systems-analysis) and just wrapping up a full-stack internship at SAP.
 
 I like building things that have to hold up in someone else's hands: agents that check with a person before they act, business software with a lot of rules, and now and then something with a camera or a microphone attached. Most days that means Python and TypeScript.
-
-Everything drawn on this page comes from [a few scripts](./scripts) in this repository, and the dial is reprinted every Monday.
 
 More at [imranjan.cn](https://imranjan.cn) and on [LinkedIn](https://linkedin.com/in/imranjan7).
 
