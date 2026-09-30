@@ -1,54 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 320" role="img" aria-labelledby="title">
 <title id="title">Imranjan</title>
 <defs>
-<linearGradient id="paper" x2="0" y2="1"><stop stop-color="#FCFAF5"/><stop offset="1" stop-color="#F0E9DD"/></linearGradient>
+<linearGradient id="paper" x2="0" y2="1"><stop stop-color="#221E1A"/><stop offset="1" stop-color="#171411"/></linearGradient>
 <clipPath id="sheet"><rect width="1080" height="320" rx="14"/></clipPath>
 <filter id="tooth" x="0" y="0" width="1080" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
   <feTurbulence type="fractalNoise" baseFrequency=".9 .75" numOctaves="3" seed="4" result="noise"/>
   <feDiffuseLighting in="noise" surfaceScale="1.4" lighting-color="#fff" result="lit"><feDistantLight azimuth="225" elevation="30"/></feDiffuseLighting>
-  <feColorMatrix in="lit" values="0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0 0.14 -0.13 0 0 0 0.065" result="shade"/>
-  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.1 0 0 0 -0.05" result="shine"/>
+  <feColorMatrix in="lit" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.3 0 0 0 0.15" result="shade"/>
+  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.06 0 0 0 -0.03" result="shine"/>
   <feMerge><feMergeNode in="shade"/><feMergeNode in="shine"/></feMerge>
 </filter>
 <filter id="press" x="0" y="0" width="1080" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
   <feGaussianBlur in="SourceAlpha" stdDeviation="0.6" result="bump"/>
   <feDiffuseLighting in="bump" surfaceScale="-1.1" lighting-color="#fff" result="lit"><feDistantLight azimuth="225" elevation="30"/></feDiffuseLighting>
-  <feColorMatrix in="lit" values="0 0 0 0 0.24 0 0 0 0 0.14 0 0 0 0 0.07 -0.9 0 0 0 0.45" result="wallShade"/>
-  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.9 0 0 0 -0.45" result="wallShine"/>
-  <feTurbulence type="fractalNoise" baseFrequency=".035 .05" numOctaves="3" seed="11" result="mottle"/>
-  <feColorMatrix in="mottle" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.42 1.17" result="cover"/>
-  <feComposite in="SourceGraphic" in2="cover" operator="in" result="ink"/>
+  <feColorMatrix in="lit" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.3 0 0 0 0.65" result="wallShade"/>
+  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.25 0 0 0 -0.125" result="wallShine"/>
+  <feComposite in="SourceGraphic" in2="SourceAlpha" operator="in" result="ink"/>
   <feMerge><feMergeNode in="wallShade"/><feMergeNode in="wallShine"/><feMergeNode in="ink"/></feMerge>
 </filter>
 <filter id="blind" x="0" y="0" width="1080" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
   <feGaussianBlur in="SourceAlpha" stdDeviation="0.7" result="bump"/>
   <feDiffuseLighting in="bump" surfaceScale="-1.3" lighting-color="#fff" result="lit"><feDistantLight azimuth="225" elevation="30"/></feDiffuseLighting>
-  <feColorMatrix in="lit" values="0 0 0 0 0.24 0 0 0 0 0.14 0 0 0 0 0.07 -0.9 0 0 0 0.45" result="wallShade"/>
-  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.9 0 0 0 -0.45" result="wallShine"/>
+  <feColorMatrix in="lit" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.3 0 0 0 0.65" result="wallShade"/>
+  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.25 0 0 0 -0.125" result="wallShine"/>
   <feMerge><feMergeNode in="wallShade"/><feMergeNode in="wallShine"/></feMerge>
 </filter>
-<linearGradient id="ink" x2="1"><stop stop-color="#8B4513"/><stop offset="1" stop-color="#7A3C12"/></linearGradient>
+<linearGradient id="ink" x2="1" y2=".35"><stop stop-color="#9C5E30"/><stop offset=".38" stop-color="#C98F5B"/><stop offset=".62" stop-color="#A5683A"/><stop offset="1" stop-color="#83491F"/></linearGradient>
 <filter id="name-live" x="0" y="0" width="1080" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
   <feGaussianBlur in="SourceAlpha" stdDeviation=".9" result="bump"/>
   <feDiffuseLighting in="bump" surfaceScale="-1.8" lighting-color="#fff" result="lit"><feDistantLight azimuth="225" elevation="30"/></feDiffuseLighting>
-  <feColorMatrix in="lit" values="0 0 0 0 0.24 0 0 0 0 0.14 0 0 0 0 0.07 -0.9 0 0 0 0.45" result="wallShade"/>
-  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.9 0 0 0 -0.45" result="wallShine"/>
-  <feTurbulence type="fractalNoise" baseFrequency=".035 .05" numOctaves="3" seed="11" result="mottle"/>
-  <feColorMatrix in="mottle" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.42 1.17" result="cover"/>
-  <feComposite in="SourceGraphic" in2="cover" operator="in" result="ink"/>
-  <feSpecularLighting in="SourceAlpha" surfaceScale="0" specularConstant="0.6" specularExponent="14" lighting-color="#FFE7CC" result="spec"><fePointLight x="-420" y="150" z="260"><animate attributeName="x" values="-420;-420;1500;1500" keyTimes="0;.06;.6;1" dur="5s" calcMode="spline" keySplines="0 0 1 1;.42 0 .3 1;0 0 1 1" repeatCount="indefinite"/></fePointLight></feSpecularLighting>
+  <feColorMatrix in="lit" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.3 0 0 0 0.65" result="wallShade"/>
+  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.25 0 0 0 -0.125" result="wallShine"/>
+  <feComposite in="SourceGraphic" in2="SourceAlpha" operator="in" result="ink"/>
+  <feSpecularLighting in="SourceAlpha" surfaceScale="0" specularConstant="1.1" specularExponent="22" lighting-color="#FFE0BD" result="spec"><fePointLight x="-420" y="150" z="260"><animate attributeName="x" values="-420;-420;1500;1500" keyTimes="0;.06;.6;1" dur="5s" calcMode="spline" keySplines="0 0 1 1;.42 0 .3 1;0 0 1 1" repeatCount="indefinite"/></fePointLight></feSpecularLighting>
   <feComposite in="spec" in2="SourceAlpha" operator="in" result="sheen"/>
   <feMerge><feMergeNode in="wallShade"/><feMergeNode in="wallShine"/><feMergeNode in="ink"/><feMergeNode in="sheen"/></feMerge>
 </filter>
 <filter id="name-still" x="0" y="0" width="1080" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
   <feGaussianBlur in="SourceAlpha" stdDeviation=".9" result="bump"/>
   <feDiffuseLighting in="bump" surfaceScale="-1.8" lighting-color="#fff" result="lit"><feDistantLight azimuth="225" elevation="30"/></feDiffuseLighting>
-  <feColorMatrix in="lit" values="0 0 0 0 0.24 0 0 0 0 0.14 0 0 0 0 0.07 -0.9 0 0 0 0.45" result="wallShade"/>
-  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.9 0 0 0 -0.45" result="wallShine"/>
-  <feTurbulence type="fractalNoise" baseFrequency=".035 .05" numOctaves="3" seed="11" result="mottle"/>
-  <feColorMatrix in="mottle" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.42 1.17" result="cover"/>
-  <feComposite in="SourceGraphic" in2="cover" operator="in" result="ink"/>
-  <feSpecularLighting in="SourceAlpha" surfaceScale="0" specularConstant="0.6" specularExponent="14" lighting-color="#FFE7CC" result="spec"><fePointLight x="330" y="150" z="260"/></feSpecularLighting>
+  <feColorMatrix in="lit" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.3 0 0 0 0.65" result="wallShade"/>
+  <feColorMatrix in="lit" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 .98 0.25 0 0 0 -0.125" result="wallShine"/>
+  <feComposite in="SourceGraphic" in2="SourceAlpha" operator="in" result="ink"/>
+  <feSpecularLighting in="SourceAlpha" surfaceScale="0" specularConstant="1.1" specularExponent="22" lighting-color="#FFE0BD" result="spec"><fePointLight x="330" y="150" z="260"/></feSpecularLighting>
   <feComposite in="spec" in2="SourceAlpha" operator="in" result="sheen"/>
   <feMerge><feMergeNode in="wallShade"/><feMergeNode in="wallShine"/><feMergeNode in="ink"/><feMergeNode in="sheen"/></feMerge>
 </filter>

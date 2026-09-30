@@ -4,8 +4,8 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 export const projects = [
-  { repo: "vercel-labs/agent-browser", focus: "CDP-session resilience, HAR capture, CLI error contracts, browser-state restoration" },
-  { repo: "vercel-labs/native", focus: "Windows portability, image-cache test compilation, markup-server correctness, build validation" },
+  { repo: "vercel-labs/agent-browser", focus: " on CDP sessions that disappear mid-setup, HAR capture, JSON error output and restoring saved browser state" },
+  { repo: "vercel-labs/native", focus: ", mostly to get the build and tests running on Windows, plus a position fix in the markup language server" },
 ];
 const start = "<!-- upstream-prs:start -->";
 const end = "<!-- upstream-prs:end -->";
@@ -72,24 +72,27 @@ export async function fetchLedger(token, fetcher = fetch) {
   });
 }
 
-export function renderLedger(records, date = new Date().toISOString().slice(0, 10)) {
-  const lines = [
-    "", "| Project | Open | Merged | Total | Focus |",
-    "| --- | ---: | ---: | ---: | --- |",
-  ];
+function countPhrase({ total, open, merged }) {
+  const noun = total === 1 ? "pull request" : "pull requests";
+  const parts = [merged && merged + " merged", open && open + " open", total - open - merged && (total - open - merged) + " closed"].filter(Boolean);
+  if (parts.length === 1) return parts[0] + " " + noun;
+  return total + " " + noun + " (" + parts.slice(0, -1).join(", ") + " and " + parts.at(-1) + ")";
+}
+
+export function renderLedger(records) {
+  const lines = [""];
   for (const record of records) {
-    const name = record.repo.split("/")[1];
-    lines.push(`| [${name}](https://github.com/${record.repo}/pulls?q=is%3Apr+author%3Anarmi924) | ${record.open} | ${record.merged} | ${record.total} | ${record.focus} |`);
+    const link = `[${record.repo.split("/")[1]}](https://github.com/${record.repo}/pulls?q=is%3Apr+author%3Anarmi924)`;
+    lines.push(record.total ? `- ${countPhrase(record)} to ${link}${record.focus}` : `- No pull requests to ${link} yet`);
   }
-  lines.push("", "<details>", `<summary><strong>Recent upstream PR ledger — updated: ${date}</strong></summary>`,
-    "", "Eight most recently updated PRs per project · UTC dates.", "");
+  lines.push("", "<details>", "<summary>Recent pull requests</summary>", "");
   for (const record of records) {
     lines.push("**" + record.repo.split("/")[1] + "**", "");
     for (const pr of record.prs) {
-      const state = pr.state === "MERGED" ? "Merged" : pr.state === "CLOSED" ? "Closed" : pr.isDraft ? "Draft" : "Open";
-      lines.push(`- [#${pr.number} — ${safeText(pr.title)}](${pr.url}) · **${state}** · ${pr.updatedAt.slice(0, 10)}`);
+      const state = pr.state === "MERGED" ? "merged" : pr.state === "CLOSED" ? "closed" : pr.isDraft ? "draft" : "open";
+      lines.push(`- [#${pr.number}](${pr.url}) ${safeText(pr.title)} (${state})`);
     }
-    if (!record.prs.length) lines.push("No public PRs yet.");
+    if (!record.prs.length) lines.push("Nothing here yet.");
     lines.push("");
   }
   lines.push("</details>", "");

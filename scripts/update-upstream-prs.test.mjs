@@ -27,15 +27,19 @@ test("only replaces the delimited section and preserves CRLF", () => {
 test("uses full search counts, escapes titles and distinguishes PR states", async () => {
   const records = await fetchLedger("test", respond(payload()));
   assert.equal(records[0].total, 15);
-  const text = renderLedger(records, "2026-09-18");
-  assert.ok(text.includes("| 10 | 3 | 15 |"));
+  const text = renderLedger(records);
+  assert.ok(text.includes("15 pull requests (3 merged, 10 open and 2 closed)"));
+  assert.ok(text.includes("- No pull requests to [native]("));
   assert.ok(text.includes("&lt;img&gt; \\[title\\] \\| code"));
-  assert.ok(text.includes("**Merged**"));
-  assert.ok(text.includes("No public PRs yet."));
-  for (const [state, isDraft, label] of [["CLOSED", true, "Closed"], ["OPEN", true, "Draft"], ["OPEN", false, "Open"]]) {
+  assert.ok(text.includes("(merged)"));
+  assert.ok(text.includes("Nothing here yet."));
+  assert.ok(!/\d{4}-\d{2}-\d{2}/.test(text), "no dates, so an unchanged week makes no commit");
+  for (const [state, isDraft, label] of [["CLOSED", true, "closed"], ["OPEN", true, "draft"], ["OPEN", false, "open"]]) {
     records[0].prs = [{ ...pr, state, isDraft }];
-    assert.ok(renderLedger(records).includes("**" + label + "**"));
+    assert.ok(renderLedger(records).includes("(" + label + ")"));
   }
+  records[0] = { ...records[0], total: 7, open: 7, merged: 0 };
+  assert.ok(renderLedger(records).includes("- 7 open pull requests to [agent-browser]("));
 });
 
 test("partial API errors, missing counts and invalid PR URLs are rejected", async () => {
