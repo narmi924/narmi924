@@ -20,7 +20,7 @@ More at [imranjan.cn](https://imranjan.cn) and on [LinkedIn](https://linkedin.co
 
 ## Hackathons
 
-- **[Bring Your Own Factory](https://github.com/narmi924/byof-agent)**, NUS-ISS / AWS Show Me Your Agents Hackathon 2026 with team LIZZ, *in progress*  
+- **[Bring Your Own Factory](https://github.com/narmi924/byof-agent)**, NUS-ISS / AWS Show Me Your Agents Hackathon 2026 with team LIZZ
   A production-planning agent that reschedules a factory only after the manager approves a plan. [Demo video](https://www.youtube.com/watch?v=Ul6LUf-bLsM)  
   `Python`&nbsp;`LangGraph`&nbsp;`OR-Tools`
 - **[Shopping Copilot](https://github.com/narmi924/shopping-copilot)**, TikTok TechJam 2026, Track 4  
