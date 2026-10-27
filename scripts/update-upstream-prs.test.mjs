@@ -9,7 +9,7 @@ const original = "Keep my projects\n<!-- upstream-prs:start -->\nold\n<!-- upstr
 const pr = { number: 1, title: "<img> [title] | code", url: "https://github.com/vercel-labs/agent-browser/pull/1", state: "MERGED", isDraft: false, updatedAt: "2026-09-18T00:00:00Z" };
 function payload() {
   return { data: {
-    p0: { issueCount: 15, nodes: [pr] }, open0: { issueCount: 10 }, merged0: { issueCount: 3 },
+    p0: { issueCount: 17, nodes: [pr] }, open0: { issueCount: 10 }, merged0: { issueCount: 3 },
     p1: { issueCount: 0, nodes: [] }, open1: { issueCount: 0 }, merged1: { issueCount: 0 },
   } };
 }
@@ -26,9 +26,9 @@ test("only replaces the delimited section and preserves CRLF", () => {
 
 test("uses full search counts, escapes titles and distinguishes PR states", async () => {
   const records = await fetchLedger("test", respond(payload()));
-  assert.equal(records[0].total, 15);
+  assert.equal(records[0].total, 17);
   const text = renderLedger(records);
-  assert.ok(text.includes("15 pull requests (3 merged, 10 open and 2 closed)"));
+  assert.ok(text.includes("17 pull requests (3 merged, 10 open, 2 carried over into a merged fix and 2 closed)"));
   assert.ok(text.includes("- No pull requests to [native]("));
   assert.ok(text.includes("&lt;img&gt; \\[title\\] \\| code"));
   assert.ok(text.includes("(merged)"));
@@ -38,8 +38,34 @@ test("uses full search counts, escapes titles and distinguishes PR states", asyn
     records[0].prs = [{ ...pr, state, isDraft }];
     assert.ok(renderLedger(records).includes("(" + label + ")"));
   }
-  records[0] = { ...records[0], total: 7, open: 7, merged: 0 };
+  records[0] = { ...records[0], total: 7, open: 7, merged: 0, carried: 0 };
   assert.ok(renderLedger(records).includes("- 7 open pull requests to [agent-browser]("));
+});
+
+test("carried-over PRs are counted apart from closed ones and link the fix that merged them", async () => {
+  const data = payload();
+  data.data.p0 = { issueCount: 7, nodes: [
+    { ...pr, number: 1573, url: "https://github.com/vercel-labs/agent-browser/pull/1573", state: "CLOSED" },
+    { ...pr, number: 1655, url: "https://github.com/vercel-labs/agent-browser/pull/1655", state: "OPEN" },
+  ] };
+  data.data.open0 = { issueCount: 5 };
+  data.data.merged0 = { issueCount: 0 };
+  const records = await fetchLedger("test", respond(data));
+  const text = renderLedger(records);
+  assert.ok(text.includes("- 7 pull requests (5 open and 2 carried over into a merged fix) to [agent-browser]("));
+  assert.ok(text.includes("(carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)"));
+  assert.ok(text.includes("pull/1655) &lt;img&gt; \\[title\\] \\| code (open)"));
+  records[0] = { ...records[0], open: 0, carried: 2, total: 2, carriedInto: { 1: 10, 2: 20 } };
+  assert.ok(renderLedger(records).includes("- 2 pull requests (2 carried over into merged fixes) to"));
+});
+
+test("a carried-over PR that is not closed, or more carried than closed, is rejected", async () => {
+  const reopened = payload();
+  reopened.data.p0.nodes = [{ ...pr, number: 1574, url: "https://github.com/vercel-labs/agent-browser/pull/1574", state: "OPEN" }];
+  await assert.rejects(fetchLedger("test", respond(reopened)), /carried over but is open/);
+  const overcounted = payload();
+  overcounted.data.p0.issueCount = 14;
+  await assert.rejects(fetchLedger("test", respond(overcounted)));
 });
 
 test("partial API errors, missing counts and invalid PR URLs are rejected", async () => {

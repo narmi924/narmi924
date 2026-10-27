@@ -4,7 +4,9 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 export const projects = [
-  { repo: "vercel-labs/agent-browser", focus: " on CDP sessions that disappear mid-setup, HAR capture, JSON error output and restoring saved browser state" },
+  { repo: "vercel-labs/agent-browser", focus: " on CDP sessions that disappear mid-setup, HAR capture, JSON error output and restoring saved browser state",
+    // Closed PRs a maintainer carried over into a PR of their own that was merged.
+    carriedInto: { 1573: 2212, 1574: 2212 } },
   { repo: "vercel-labs/native", focus: ", mostly to get the build and tests running on Windows, plus a position fix in the markup language server" },
 ];
 const start = "<!-- upstream-prs:start -->";
@@ -55,9 +57,10 @@ export async function fetchLedger(token, fetcher = fetch) {
     const result = payload.data?.["p" + index];
     const open = payload.data?.["open" + index]?.issueCount;
     const merged = payload.data?.["merged" + index]?.issueCount;
+    const carried = Object.keys(project.carriedInto ?? {}).length;
     if (!result || !Array.isArray(result.nodes) ||
         ![result.issueCount, open, merged].every(n => Number.isInteger(n) && n >= 0) ||
-        open + merged > result.issueCount || (result.issueCount > 0 && result.nodes.length === 0)) {
+        open + merged + carried > result.issueCount || (result.issueCount > 0 && result.nodes.length === 0)) {
       throw new Error("Incomplete PR data for " + project.repo);
     }
     for (const pr of result.nodes) {
@@ -67,15 +70,20 @@ export async function fetchLedger(token, fetcher = fetch) {
           !Number.isFinite(Date.parse(pr.updatedAt))) {
         throw new Error("Invalid PR data for " + project.repo);
       }
+      if (project.carriedInto?.[pr.number] && pr.state !== "CLOSED") {
+        throw new Error("PR #" + pr.number + " is listed as carried over but is " + pr.state.toLowerCase());
+      }
     }
-    return { ...project, total: result.issueCount, open, merged, prs: result.nodes };
+    return { ...project, total: result.issueCount, open, merged, carried, prs: result.nodes };
   });
 }
 
-function countPhrase({ total, open, merged }) {
+function countPhrase({ total, open, merged, carried = 0, carriedInto = {} }) {
   const noun = total === 1 ? "pull request" : "pull requests";
-  const parts = [merged && merged + " merged", open && open + " open", total - open - merged && (total - open - merged) + " closed"].filter(Boolean);
-  if (parts.length === 1) return parts[0] + " " + noun;
+  const fixes = new Set(Object.values(carriedInto)).size === 1 ? "a merged fix" : "merged fixes";
+  const closed = total - open - merged - carried;
+  const parts = [merged && merged + " merged", open && open + " open", carried && carried + " carried over into " + fixes, closed && closed + " closed"].filter(Boolean);
+  if (parts.length === 1) return carried ? total + " " + noun + " (" + parts[0] + ")" : parts[0] + " " + noun;
   return total + " " + noun + " (" + parts.slice(0, -1).join(", ") + " and " + parts.at(-1) + ")";
 }
 
@@ -89,7 +97,9 @@ export function renderLedger(records) {
   for (const record of records) {
     lines.push("**" + record.repo.split("/")[1] + "**", "");
     for (const pr of record.prs) {
-      const state = pr.state === "MERGED" ? "merged" : pr.state === "CLOSED" ? "closed" : pr.isDraft ? "draft" : "open";
+      const into = record.carriedInto?.[pr.number];
+      const state = pr.state === "MERGED" ? "merged" : into ? `carried over into [#${into}](https://github.com/${record.repo}/pull/${into}), merged`
+        : pr.state === "CLOSED" ? "closed" : pr.isDraft ? "draft" : "open";
       lines.push(`- [#${pr.number}](${pr.url}) ${safeText(pr.title)} (${state})`);
     }
     if (!record.prs.length) lines.push("Nothing here yet.");

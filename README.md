@@ -40,9 +40,11 @@ More at [imranjan.cn](https://imranjan.cn) and on [LinkedIn](https://linkedin.co
 
 I send fixes to two Vercel Labs projects, mostly around browser reliability, Windows support and developer tooling.
 
+> **Saved browser state now survives login redirects.** I traced [agent-browser#1505](https://github.com/vercel-labs/agent-browser/issues/1505), a large `sessionStorage` value lost when a saved session was restored, to a race: the app's auth guard redirected to login before the storage was written, so the tokens landed under the wrong origin. A maintainer carried my [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) and [#1574](https://github.com/vercel-labs/agent-browser/pull/1574) over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged in October 2026, which now restores storage only on the saved origin and reports any origin it had to skip.
+
 <!-- upstream-prs:start -->
 
-- 7 open pull requests to [agent-browser](https://github.com/vercel-labs/agent-browser/pulls?q=is%3Apr+author%3Anarmi924) on CDP sessions that disappear mid-setup, HAR capture, JSON error output and restoring saved browser state
+- 7 pull requests (5 open and 2 carried over into a merged fix) to [agent-browser](https://github.com/vercel-labs/agent-browser/pulls?q=is%3Apr+author%3Anarmi924) on CDP sessions that disappear mid-setup, HAR capture, JSON error output and restoring saved browser state
 - 4 open pull requests to [native](https://github.com/vercel-labs/native/pulls?q=is%3Apr+author%3Anarmi924), mostly to get the build and tests running on Windows, plus a position fix in the markup language server
 
 <details>
@@ -50,13 +52,13 @@ I send fixes to two Vercel Labs projects, mostly around browser reliability, Win
 
 **agent-browser**
 
+- [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) fix(state): report storage restore failures (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
+- [#1574](https://github.com/vercel-labs/agent-browser/pull/1574) fix(state): restore storage before page scripts (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
 - [#1655](https://github.com/vercel-labs/agent-browser/pull/1655) fix(network): ignore vanished CDP sessions during setup (open)
 - [#1654](https://github.com/vercel-labs/agent-browser/pull/1654) fix(errors): clear page error log (open)
 - [#1590](https://github.com/vercel-labs/agent-browser/pull/1590) fix(har): preserve capture after export failure (open)
 - [#1572](https://github.com/vercel-labs/agent-browser/pull/1572) fix(native): propagate launch init scripts to new targets (open)
 - [#1576](https://github.com/vercel-labs/agent-browser/pull/1576) fix(cli): preserve JSON for startup errors (open)
-- [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) fix(state): report storage restore failures (open)
-- [#1574](https://github.com/vercel-labs/agent-browser/pull/1574) fix(state): restore storage before page scripts (open)
 
 **native**
 
