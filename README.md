@@ -20,7 +20,13 @@ More at [imranjan.cn](https://imranjan.cn) and on [LinkedIn](https://linkedin.co
 
 ## Hackathons
 
-- **[Bring Your Own Factory](https://github.com/narmi924/byof-agent)**, NUS-ISS / AWS Show Me Your Agents Hackathon 2026 with team LIZZ
+- **[Gantry](https://github.com/narmi924/gantry)**, Microsoft × Premier League Inside the Game Hackathon 2026  
+  A multi-agent production crew that turns one football match into a separate live broadcast for each kind of fan, from newcomers and analysts to blind fans following an audio-described feed, in eight languages. [Demo video](https://youtu.be/vPupkhUmb2c)  
+  `Python`&nbsp;`Microsoft Agent Framework`&nbsp;`Three.js`
+- **[PlusOne](https://plusone-sjgp.onrender.com/live/lumicloset)**, PayPal AI Hackathon 2026  
+  An assistant for small sellers who sell on live video. Buyers type the way they talk ("the blue one from before, M", "change to L, don't add another"), and it keeps each buyer's order right and collects with PayPal.  
+  `TypeScript`&nbsp;`Fastify`&nbsp;`PayPal`
+- **[Bring Your Own Factory](https://github.com/narmi924/byof-agent)**, NUS-ISS / AWS Show Me Your Agents Hackathon 2026 with team LIZZ  
   A production-planning agent that reschedules a factory only after the manager approves a plan. [Demo video](https://www.youtube.com/watch?v=Ul6LUf-bLsM)  
   `Python`&nbsp;`LangGraph`&nbsp;`OR-Tools`
 - **[Shopping Copilot](https://github.com/narmi924/shopping-copilot)**, TikTok TechJam 2026, Track 4  
@@ -38,34 +44,38 @@ More at [imranjan.cn](https://imranjan.cn) and on [LinkedIn](https://linkedin.co
 
 ## Open source
 
-I send fixes to two Vercel Labs projects, mostly around browser reliability, Windows support and developer tooling.
-
-> **Saved browser state now survives login redirects.** I traced [agent-browser#1505](https://github.com/vercel-labs/agent-browser/issues/1505), a large `sessionStorage` value lost when a saved session was restored, to a race: the app's auth guard redirected to login before the storage was written, so the tokens landed under the wrong origin. A maintainer carried my [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) and [#1574](https://github.com/vercel-labs/agent-browser/pull/1574) over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged in October 2026, which now restores storage only on the saved origin and reports any origin it had to skip.
+[agent-browser](https://github.com/vercel-labs/agent-browser) is how my coding agents open, sign in to and check every web app I build, and I built my own local agent's desktop app on [native](https://github.com/vercel-labs/native). Both are Vercel Labs projects. When either gets in my way, I try to fix it upstream.
 
 <!-- upstream-prs:start -->
 
-- 7 pull requests (5 open and 2 carried over into a merged fix) to [agent-browser](https://github.com/vercel-labs/agent-browser/pulls?q=is%3Apr+author%3Anarmi924) on CDP sessions that disappear mid-setup, HAR capture, JSON error output and restoring saved browser state
-- 4 open pull requests to [native](https://github.com/vercel-labs/native/pulls?q=is%3Apr+author%3Anarmi924), mostly to get the build and tests running on Windows, plus a position fix in the markup language server
+- **Saved browser state lost to a login redirect**, agent-browser [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged  
+  Restoring a saved session seemed to drop large `sessionStorage` values ([#1505](https://github.com/vercel-labs/agent-browser/issues/1505)). I found the size didn't matter: the app's auth guard redirected to login before storage was written, so the value landed under the login page's origin. Carried over from my [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) and [#1574](https://github.com/vercel-labs/agent-browser/pull/1574).
+- **`errors --clear` that never cleared**, agent-browser [#2253](https://github.com/vercel-labs/agent-browser/pull/2253), merged with me as co-author  
+  The CLI and the MCP server passed the flag on, but the daemon ignored it and kept returning the same errors. Carried over from my [#1654](https://github.com/vercel-labs/agent-browser/pull/1654).
+- **HAR captures lost to a failed export**, agent-browser [#2271](https://github.com/vercel-labs/agent-browser/pull/2271), in review with me as co-author  
+  `network har stop` cleared the recording before writing the file, so a bad output path lost the capture and a retry saved an empty HAR. Carried over from my [#1590](https://github.com/vercel-labs/agent-browser/pull/1590).
+
+Three more pull requests are open on [agent-browser](https://github.com/vercel-labs/agent-browser/pulls?q=is%3Apr+author%3Anarmi924), for init scripts in new tabs, JSON output for startup errors and CDP sessions that vanish during setup. Four are open on [native](https://github.com/vercel-labs/native/pulls?q=is%3Apr+author%3Anarmi924), mostly to get its build and tests running on Windows.
 
 <details>
 <summary>Recent pull requests</summary>
 
 **agent-browser**
 
-- [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) fix(state): report storage restore failures (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
-- [#1574](https://github.com/vercel-labs/agent-browser/pull/1574) fix(state): restore storage before page scripts (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
 - [#1655](https://github.com/vercel-labs/agent-browser/pull/1655) fix(network): ignore vanished CDP sessions during setup (open)
-- [#1654](https://github.com/vercel-labs/agent-browser/pull/1654) fix(errors): clear page error log (open)
-- [#1590](https://github.com/vercel-labs/agent-browser/pull/1590) fix(har): preserve capture after export failure (open)
-- [#1572](https://github.com/vercel-labs/agent-browser/pull/1572) fix(native): propagate launch init scripts to new targets (open)
+- [#1654](https://github.com/vercel-labs/agent-browser/pull/1654) fix(errors): clear page error log (carried over into [#2253](https://github.com/vercel-labs/agent-browser/pull/2253), merged, co-authored)
+- [#1590](https://github.com/vercel-labs/agent-browser/pull/1590) fix(har): preserve capture after export failure (carried over into [#2271](https://github.com/vercel-labs/agent-browser/pull/2271), in review, co-authored)
 - [#1576](https://github.com/vercel-labs/agent-browser/pull/1576) fix(cli): preserve JSON for startup errors (open)
+- [#1574](https://github.com/vercel-labs/agent-browser/pull/1574) fix(state): restore storage before page scripts (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
+- [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) fix(state): report storage restore failures (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
+- [#1572](https://github.com/vercel-labs/agent-browser/pull/1572) fix(native): propagate launch init scripts to new targets (open)
 
 **native**
 
 - [#171](https://github.com/vercel-labs/native/pull/171) Make image cache tests compile on Windows (open)
-- [#157](https://github.com/vercel-labs/native/pull/157) Make build validation portable on Windows (open)
-- [#158](https://github.com/vercel-labs/native/pull/158) Run the core package gate on Windows (open)
 - [#159](https://github.com/vercel-labs/native/pull/159) Use UTF-16 positions in the markup language server (open)
+- [#158](https://github.com/vercel-labs/native/pull/158) Run the core package gate on Windows (open)
+- [#157](https://github.com/vercel-labs/native/pull/157) Make build validation portable on Windows (open)
 
 </details>
 
