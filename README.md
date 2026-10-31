@@ -52,10 +52,10 @@ More at [imranjan.cn](https://imranjan.cn) and on [LinkedIn](https://linkedin.co
   Restoring a saved session seemed to drop large `sessionStorage` values ([#1505](https://github.com/vercel-labs/agent-browser/issues/1505)). I found the size didn't matter: the app's auth guard redirected to login before storage was written, so the value landed under the login page's origin. Carried over from my [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) and [#1574](https://github.com/vercel-labs/agent-browser/pull/1574).
 - **`errors --clear` that never cleared**, agent-browser [#2253](https://github.com/vercel-labs/agent-browser/pull/2253), merged with me as co-author  
   The CLI and the MCP server passed the flag on, but the daemon ignored it and kept returning the same errors. Carried over from my [#1654](https://github.com/vercel-labs/agent-browser/pull/1654).
-- **HAR captures lost to a failed export**, agent-browser [#2271](https://github.com/vercel-labs/agent-browser/pull/2271), in review with me as co-author  
+- **HAR captures lost to a failed export**, agent-browser [#2271](https://github.com/vercel-labs/agent-browser/pull/2271), merged with me as co-author  
   `network har stop` cleared the recording before writing the file, so a bad output path lost the capture and a retry saved an empty HAR. Carried over from my [#1590](https://github.com/vercel-labs/agent-browser/pull/1590).
 
-Three more pull requests are open on [agent-browser](https://github.com/vercel-labs/agent-browser/pulls?q=is%3Apr+author%3Anarmi924), for init scripts in new tabs, JSON output for startup errors and CDP sessions that vanish during setup. Four are open on [native](https://github.com/vercel-labs/native/pulls?q=is%3Apr+author%3Anarmi924), mostly to get its build and tests running on Windows.
+Three more pull requests are open on [agent-browser](https://github.com/vercel-labs/agent-browser/pulls?q=is%3Apr+author%3Anarmi924), for init scripts in new tabs, JSON output for startup errors and CDP sessions that vanish during setup. Three are open on [native](https://github.com/vercel-labs/native/pulls?q=is%3Apr+author%3Anarmi924), mostly to keep it building and running on Windows.
 
 <details>
 <summary>Recent pull requests</summary>
@@ -64,7 +64,7 @@ Three more pull requests are open on [agent-browser](https://github.com/vercel-l
 
 - [#1655](https://github.com/vercel-labs/agent-browser/pull/1655) fix(network): ignore vanished CDP sessions during setup (open)
 - [#1654](https://github.com/vercel-labs/agent-browser/pull/1654) fix(errors): clear page error log (carried over into [#2253](https://github.com/vercel-labs/agent-browser/pull/2253), merged, co-authored)
-- [#1590](https://github.com/vercel-labs/agent-browser/pull/1590) fix(har): preserve capture after export failure (carried over into [#2271](https://github.com/vercel-labs/agent-browser/pull/2271), in review, co-authored)
+- [#1590](https://github.com/vercel-labs/agent-browser/pull/1590) fix(har): preserve capture after export failure (carried over into [#2271](https://github.com/vercel-labs/agent-browser/pull/2271), merged, co-authored)
 - [#1576](https://github.com/vercel-labs/agent-browser/pull/1576) fix(cli): preserve JSON for startup errors (open)
 - [#1574](https://github.com/vercel-labs/agent-browser/pull/1574) fix(state): restore storage before page scripts (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
 - [#1573](https://github.com/vercel-labs/agent-browser/pull/1573) fix(state): report storage restore failures (carried over into [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), merged)
@@ -72,9 +72,8 @@ Three more pull requests are open on [agent-browser](https://github.com/vercel-l
 
 **native**
 
-- [#171](https://github.com/vercel-labs/native/pull/171) Make image cache tests compile on Windows (open)
+- [#757](https://github.com/vercel-labs/native/pull/757) Keep automation publication failures from ending the app (open)
 - [#159](https://github.com/vercel-labs/native/pull/159) Use UTF-16 positions in the markup language server (open)
-- [#158](https://github.com/vercel-labs/native/pull/158) Run the core package gate on Windows (open)
 - [#157](https://github.com/vercel-labs/native/pull/157) Make build validation portable on Windows (open)
 
 </details>

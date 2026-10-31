@@ -20,7 +20,9 @@ export const projects = [
       { pr: 2271, title: "HAR captures lost to a failed export",
         story: "`network har stop` cleared the recording before writing the file, so a bad output path lost the capture and a retry saved an empty HAR." },
     ] },
-  { repo: "vercel-labs/native", focus: ", mostly to get its build and tests running on Windows" },
+  { repo: "vercel-labs/native", focus: ", mostly to keep it building and running on Windows",
+    // PRs I closed myself after main moved on; they are left out of the README.
+    withdrawn: [158, 171] },
 ];
 const start = "<!-- upstream-prs:start -->";
 const end = "<!-- upstream-prs:end -->";
@@ -44,7 +46,8 @@ function safeText(value) {
     .replace(/[\\`*_[\]{}|]/g, (char) => "\\" + char);
 }
 
-const linkedNumbers = ({ carriedInto = {}, fixes = [] }) => [...Object.keys(carriedInto).map(Number), ...fixes.map(fix => fix.pr)];
+const linkedNumbers = ({ carriedInto = {}, fixes = [], withdrawn = [] }) =>
+  [...Object.keys(carriedInto).map(Number), ...fixes.map(fix => fix.pr), ...withdrawn];
 
 export async function fetchLedger(token, fetcher = fetch, list = projects) {
   if (!token) throw new Error("GITHUB_TOKEN or PROFILE_GITHUB_TOKEN is required.");
@@ -102,15 +105,20 @@ export async function fetchLedger(token, fetcher = fetch, list = projects) {
     for (const { from } of carried.filter(c => c.state === "MERGED")) {
       throw new Error(project.repo + "#" + from + " was merged itself, so it should not be in carriedInto");
     }
+    const withdrawn = project.withdrawn ?? [];
+    for (const n of withdrawn.filter(n => linked[n].state !== "CLOSED")) {
+      throw new Error(project.repo + "#" + n + " is in withdrawn but is " + linked[n].state.toLowerCase());
+    }
     const closed = result.issueCount - open - merged;
-    const closedCarried = carried.filter(c => c.state === "CLOSED").length;
-    if (closed > closedCarried) {
-      const unknown = result.nodes.filter(pr => pr.state === "CLOSED" && !project.carriedInto?.[pr.number]).map(pr => "#" + pr.number);
-      throw new Error(project.repo + (unknown.length ? " " + unknown.join(", ") : "") + " closed without a carriedInto entry. " +
-        "If a maintainer carried it over into a PR of their own, add it there.");
+    const accounted = carried.filter(c => c.state === "CLOSED").length + withdrawn.length;
+    if (closed > accounted) {
+      const unknown = result.nodes.filter(pr => pr.state === "CLOSED" && !project.carriedInto?.[pr.number] && !withdrawn.includes(pr.number))
+        .map(pr => "#" + pr.number);
+      throw new Error(project.repo + (unknown.length ? " " + unknown.join(", ") : "") + " closed without a carriedInto or withdrawn entry. " +
+        "If a maintainer carried it over into a PR of their own, add it to carriedInto; if I closed it myself, add it to withdrawn.");
     }
     const ownOpen = open - carried.filter(c => c.state === "OPEN").length;
-    if (closed < closedCarried || ownOpen < 0) throw new Error("Incomplete PR data for " + project.repo);
+    if (closed < accounted || ownOpen < 0) throw new Error("Incomplete PR data for " + project.repo);
 
     const fixes = (project.fixes ?? []).map(fix => {
       const pr = linked[fix.pr];
@@ -119,7 +127,7 @@ export async function fetchLedger(token, fetcher = fetch, list = projects) {
       return { ...fix, url: pr.url, state: pr.state, isDraft: pr.isDraft, coAuthored: coAuthor.test(messages),
         from: carried.filter(c => c.into === fix.pr).map(c => c.from).sort((a, b) => a - b) };
     });
-    return { ...project, total: result.issueCount, open, merged, ownOpen, fixes, prs: result.nodes };
+    return { ...project, total: result.issueCount, open, merged, ownOpen, fixes, prs: result.nodes.filter(pr => !withdrawn.includes(pr.number)) };
   });
 }
 

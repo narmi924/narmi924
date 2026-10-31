@@ -83,7 +83,7 @@ test("a closed PR nobody accounted for, or a broken carried-over map, stops the 
   const closed = payload();
   closed.data.p0.nodes.push(pr(7, "CLOSED"));
   closed.data.p0.issueCount = 6;
-  await assert.rejects(fetchLedger("test", respond(closed), list), /#7 closed without a carriedInto entry/);
+  await assert.rejects(fetchLedger("test", respond(closed), list), /#7 closed without a carriedInto or withdrawn entry/);
   const mergedItself = payload();
   mergedItself.data.r0.pr11.state = "MERGED";
   await assert.rejects(fetchLedger("test", respond(mergedItself), list), /#11 was merged itself/);
@@ -91,6 +91,22 @@ test("a closed PR nobody accounted for, or a broken carried-over map, stops the 
   abandoned.data.r0.pr200.state = "CLOSED";
   await assert.rejects(fetchLedger("test", respond(abandoned), list), /#200 was closed without merging/);
   await assert.rejects(fetchLedger("test", respond(payload()), [{ ...list[0], carriedInto: { 10: 300 } }]), /#300 is in carriedInto but has no entry in fixes/);
+});
+
+test("PRs I withdrew are left out, and a withdrawn PR that is not closed stops the refresh", async () => {
+  const nv = "https://github.com/vercel-labs/native";
+  const withdrawnList = [list[0], { ...list[1], withdrawn: [3] }];
+  const data = payload();
+  data.data.p1 = { issueCount: 2, nodes: [{ ...pr(4, "OPEN"), url: nv + "/pull/4" }, { ...pr(3, "CLOSED"), url: nv + "/pull/3" }] };
+  data.data.open1.issueCount = 1;
+  data.data.r1 = { pr3: { ...pr(3, "CLOSED"), url: nv + "/pull/3" } };
+  const text = renderLedger(await fetchLedger("test", respond(data), withdrawnList));
+  assert.ok(text.includes("on things. One is open on [native]("));
+  assert.ok(text.includes(`- [#4](${nv}/pull/4)`));
+  assert.ok(!text.includes(`[#3](${nv}/pull/3)`));
+  await assert.rejects(fetchLedger("test", respond(data), list), /native #3 closed without a carriedInto or withdrawn entry/);
+  data.data.r1.pr3.state = "OPEN";
+  await assert.rejects(fetchLedger("test", respond(data), withdrawnList), /native#3 is in withdrawn but is open/);
 });
 
 test("partial API errors, missing counts and invalid PR URLs are rejected", async () => {
