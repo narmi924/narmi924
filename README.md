@@ -6,7 +6,7 @@ I’m happy to share my laptop with an agent. I’m keeping the mouse.
 
 <img src="https://raw.githubusercontent.com/narmi924/likeness/main/media/icon.png" width="21" height="21" align="middle" alt="" />&nbsp; Give **[Likeness](https://github.com/narmi924/likeness)** a prompt to let your agent build an entire 3D scene in Blender and render it as a film.
 
-<img src="https://raw.githubusercontent.com/narmi924/claude-session-reader/main/media/icon.png" width="20" height="20" align="middle" alt="" />&nbsp; You find an old conversation on **[Claude Session Reader](https://github.com/narmi924/claude-session-reader)** by the few words you remember and hand the exact message to your next agent.
+<img src="https://raw.githubusercontent.com/narmi924/cc-reader/main/media/icon.png" width="20" height="20" align="middle" alt="" />&nbsp; You find an old conversation on **[CC Reader](https://github.com/narmi924/cc-reader)** by the few words you remember and hand the exact message to your next agent.
 
 <img src="https://avatars.githubusercontent.com/u/14985020?s=64" width="20" height="20" align="middle" alt="" />&nbsp; Merged upstream in **[agent-browser](https://github.com/vercel-labs/agent-browser)**: `sessionStorage` that survives a login redirect [#2212](https://github.com/vercel-labs/agent-browser/pull/2212), an `errors --clear` that clears [#2253](https://github.com/vercel-labs/agent-browser/pull/2253), HAR exports that retry [#2271](https://github.com/vercel-labs/agent-browser/pull/2271), a Node 22 floor for the package [#2404](https://github.com/vercel-labs/agent-browser/pull/2404).
 
